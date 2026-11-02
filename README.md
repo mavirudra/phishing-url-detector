@@ -31,6 +31,18 @@ Trained on a 50,000-URL sample, split 80/20 and tested on 10,000 unseen URLs.
 
 **Overall accuracy: 88%**
 
+## Model comparison
+
+All models trained on the same 40,000 URLs and tested on the same 10,000 unseen URLs (phishing class metrics).
+
+| Model | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| Logistic Regression | 0.792 | 0.810 | 0.354 | 0.493 |
+| **Random Forest** | **0.878** | 0.824 | **0.728** | **0.773** |
+| Gradient Boosting | 0.866 | 0.850 | 0.646 | 0.734 |
+
+Random Forest was chosen for the app: best accuracy, recall and F1. Logistic Regression misses most phishing links because a linear boundary can't capture non-linear URL patterns.
+
 ## Dataset
 
 [Phishing Site URLs](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls) from Kaggle (about 549,000 URLs labeled good or bad).
