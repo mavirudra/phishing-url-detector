@@ -80,7 +80,7 @@ requirements.txt   Dependencies
 
 ## Roadmap
 
-- [ ] Compare Logistic Regression, Random Forest and XGBoost
+- [x] Compare Logistic Regression, Random Forest and Gradient Boosting
 - [ ] Add URL entropy and special-character features
 - [ ] Train on the full dataset
 
