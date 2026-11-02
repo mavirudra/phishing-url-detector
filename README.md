@@ -2,7 +2,7 @@
 
 A machine learning web app that checks whether a URL looks like phishing, using only the structure of the link.
 
-**Live demo:** https://YOUR-APP-NAME.streamlit.app
+**Live demo:** https://isitsafe.streamlit.app
 
 ## How it works
 
