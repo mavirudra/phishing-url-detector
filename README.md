@@ -61,12 +61,22 @@ To retrain the model, download the dataset, save it as `phishing.csv` in the pro
 ```bash
 python train.py
 ```
+## Command-line usage
+
+Check a URL without the web app:
+
+```bash
+python check.py http://paypal-login.verify-account.xyz/update
+```
+
+Run `python check.py` with no arguments for interactive mode.
 
 ## Project structure
 
 ```
 app.py             Streamlit web app
 features.py        URL feature extraction
+check.py           Command-line checker
 train.py           Model training and evaluation
 model.pkl          Trained model
 requirements.txt   Dependencies
