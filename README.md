@@ -6,7 +6,7 @@ A machine learning web app that checks whether a URL looks like phishing, using 
 
 ## How it works
 
-1. Each URL is converted into 11 numeric features (see below).
+1. Each URL is converted into 13 numeric features (see below).
 2. A Random Forest classifier (100 trees) scores the features.
 3. The Streamlit app shows the phishing probability and a verdict.
 
@@ -19,6 +19,7 @@ A machine learning web app that checks whether a URL looks like phishing, using 
 | `has_ip` | Raw IP address used instead of a domain |
 | `https` | Whether the link uses HTTPS |
 | `bad_words` | Words like `login`, `verify`, `secure`, `bank` |
+| `entropy`, `host_entropy` | How random the characters look; random hostnames are common in phishing |
 
 ## Results
 
@@ -26,9 +27,8 @@ Trained on a 50,000-URL sample, split 80/20 and tested on 10,000 unseen URLs.
 
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
-| Legitimate | 0.90 | 0.94 | 0.92 |
-| Phishing | 0.82 | 0.73 | 0.77 |
-
+| Legitimate | 0.89 | 0.95 | 0.92 |
+| Phishing | 0.85 | 0.72 | 0.78 |
 **Overall accuracy: 88%**
 
 ## Model comparison
@@ -41,7 +41,7 @@ All models trained on the same 40,000 URLs and tested on the same 10,000 unseen 
 | **Random Forest** | **0.878** | 0.824 | **0.728** | **0.773** |
 | Gradient Boosting | 0.866 | 0.850 | 0.646 | 0.734 |
 
-Random Forest was chosen for the app: best accuracy, recall and F1. Logistic Regression misses most phishing links because a linear boundary can't capture non-linear URL patterns.
+Random Forest was chosen for the app: best accuracy, recall and F1. Logistic Regression misses most phishing links because a linear boundary can't capture non-linear URL patterns.Compared using the original 11 features, before adding entropy.
 
 ## Dataset
 
@@ -91,9 +91,10 @@ requirements.txt   Dependencies
 ## Roadmap
 
 - [x] Compare Logistic Regression, Random Forest and Gradient Boosting
-- [ ] Add URL entropy and special-character features
+- [x] Add URL entropy features
 - [ ] Train on the full dataset
-
+- [ ] Add special-character features
+      
 ## License
 
 MIT
