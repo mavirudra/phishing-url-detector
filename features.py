@@ -17,6 +17,7 @@ def features(url):
         host, scheme = p.netloc, p.scheme
     except ValueError:
         host, scheme = "", ""
+    special = sum(not c.isalnum() for c in url)
     return {
         "length": len(url),
         "host_length": len(host),
@@ -31,4 +32,11 @@ def features(url):
         "bad_words": sum(w in url.lower() for w in WORDS),
         "entropy": entropy(url),
         "host_entropy": entropy(host),
+        "question": url.count("?"),
+        "equals": url.count("="),
+        "ampersands": url.count("&"),
+        "percent": url.count("%"),
+        "underscores": url.count("_"),
+        "special_total": special,
+        "special_ratio": special / len(url) if url else 0,
     }
