@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from features import features
 
 df = pd.read_csv("phishing.csv")
-df = df.sample(50000, random_state=42)
+df = df.drop_duplicates(subset="URL").reset_index(drop=True)
 y = (df["Label"].str.lower() == "bad").astype(int)
 X = pd.DataFrame([features(u) for u in df["URL"]])
 
@@ -18,7 +18,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 models = {
     "Logistic Regression": make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000)),
-    "Random Forest": RandomForestClassifier(n_estimators=100, n_jobs=2, random_state=42),
+    "Random Forest": RandomForestClassifier(
+        n_estimators=100, min_samples_leaf=5, n_jobs=-1, random_state=42
+    ),
     "Gradient Boosting": HistGradientBoostingClassifier(random_state=42),
 }
 
