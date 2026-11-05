@@ -23,12 +23,12 @@ A machine learning web app that checks whether a URL looks like phishing, using 
 
 ## Results
 
-Trained on a 50,000-URL sample, split 80/20 and tested on 10,000 unseen URLs.
+Trained on all 507,195 unique URLs (duplicates removed), split 80/20 and tested on 101,439 unseen URLs.
 
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
-| Legitimate | 0.89 | 0.95 | 0.92 |
-| Phishing | 0.85 | 0.72 | 0.78 |
+| Legitimate | 0.92 | 0.97 | 0.94 |
+| Phishing | 0.89 | 0.69 | 0.78 |
 **Overall accuracy: 88%**
 
 ## Model comparison
@@ -37,16 +37,16 @@ All models trained on the same 40,000 URLs and tested on the same 10,000 unseen 
 
 | Model | Accuracy | Precision | Recall | F1 |
 |---|---|---|---|---|
-| Logistic Regression | 0.792 | 0.810 | 0.354 | 0.493 |
-| **Random Forest** | **0.878** | 0.824 | **0.728** | **0.773** |
-| Gradient Boosting | 0.866 | 0.850 | 0.646 | 0.734 |
+| Logistic Regression | 0.841 | 0.822 | 0.374 | 0.514 |
+| **Random Forest** | **0.910** | **0.888** | **0.689** | **0.776** |
+| Gradient Boosting | 0.892 | 0.854 | 0.626 | 0.722 |
 
-Random Forest was chosen for the app: best accuracy, recall and F1. Logistic Regression misses most phishing links because a linear boundary can't capture non-linear URL patterns.Compared using the original 11 features, before adding entropy.
+Random Forest wins on every metric, so it is the model in the app.
 
 ## Dataset
 
 [Phishing Site URLs](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls) from Kaggle (about 549,000 URLs labeled good or bad).
-
+Duplicate URLs were removed (549,346 rows became 507,195 unique URLs).
 ## Run it locally
 
 ```bash
@@ -85,14 +85,13 @@ requirements.txt   Dependencies
 ## Limitations
 
 - It only looks at the URL text, not page content, domain age, or reputation.
-- Phishing recall is 73%, so it misses about 1 in 4 phishing links. Don't rely on it as your only protection.
-- Trained on a sample of the data, so more data and features could improve it.
-
+- Phishing recall is 69%, so it misses about 3 in 10 phishing links
+  
 ## Roadmap
 
 - [x] Compare Logistic Regression, Random Forest and Gradient Boosting
 - [x] Add URL entropy features
-- [ ] Train on the full dataset
+- [x] Train on the full dataset
 - [ ] Add special-character features
       
 ## License
